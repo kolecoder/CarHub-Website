@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CarHub - Compare & Discover Cars</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <h1 class="logo">CarHub</h1>
+      <nav>
+        <ul>
+          <li><a href="#new-cars">New Cars</a></li>
+          <li><a href="#used-cars">Used Cars</a></li>
+          <li><a href="#" onclick="openComparisonModal()">Compare</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+      </nav>
+      <input type="text" id="search" placeholder="Filter by max price..." onkeyup="filterCars()"/>
+    </div>
+  </header>
+
+  <!-- Carousel -->
+  <section class="carousel-section">
+    <button class="carousel-btn left" onclick="scrollCarousel('left')"><i class="fas fa-chevron-left"></i></button>
+    <div class="carousel-track">
+    <div class="carousel-item" onclick="showDetails('Car 1', 'City car with great fuel economy.', 'Audi-RS6.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Audi-RS6.jpg" alt="Car 1" />
+        <h3>Audi RS6</h3>
+        <p>$20,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 1'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 2', 'City car with great fuel economy.', 'BMW-M5.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="BMW-M5.jpg" alt="Car 2" />
+        <h3>BMW M5</h3>
+        <p>$25,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 2'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 3', 'City car with great fuel economy.', 'Bugatti.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Bugatti.jpg" alt="Car 3" />
+        <h3>Bugatti</h3>
+        <p>$30,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 3'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 4', 'City car with great fuel economy.', 'Ferrari.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Ferrari.jpg" alt="Car 4" />
+        <h3>Ferrari</h3>
+        <p>$20,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 4'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 5', 'City car with great fuel economy.', 'Aston-Martin.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Aston-Martin.jpg" alt="Car 5" />
+        <h3>Aston Martin</h3>
+        <p>$25,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 5'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 6', 'City car with great fuel economy.', 'Rolls-Royce.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Rolls-Royce.jpg" alt="Car 6" />
+        <h3>Rolls Royce</h3>
+        <p>$30,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 6'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 7', 'City car with great fuel economy.', 'Skoda-Octavia.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Skoda-Octavia.jpg" alt="Car 7" />
+        <h3>Skoda Octavia</h3>
+        <p>$20,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 7'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 8', 'City car with great fuel economy.', 'Volkswagen.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Volkswagen.jpg" alt="Car 8" />
+        <h3>Volkswagen</h3>
+        <p>$25,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 8'); event.stopPropagation()">Buy Now</button>
+      </div>
+      <div class="carousel-item" onclick="showDetails('Car 9', 'City car with great fuel economy.', 'Lamborghini.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Lamborghini.jpg" alt="Car 9" />
+        <h3>Lamborghini</h3>
+        <p>$30,000</p>
+        <button class="buy-btn" onclick="buyCar('Car 9'); event.stopPropagation()">Buy Now</button>
+      </div>
+    </div>
+    <button class="carousel-btn right" onclick="scrollCarousel('right')"><i class="fas fa-chevron-right"></i></button>
+  </section>
+
+  <main class="container">
+    <h2 class="section-title">Explore Top Deals</h2>
+    <div id="car-list" class="car-grid">
+      <!-- Car Cards -->
+      <div class="car-card" data-price="20000" onclick="showDetails('Car 1', 'City car with great fuel economy.', 'Audi-RS6.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">
+        <img src="Audi-RS6.jpg" alt="Car 1" />
+        <h3>Audi RS6</h3>
+        <p class="price">$20,000</p>
+        <p class="tag">Popular</p>
+        <button class="compare-btn" onclick="compareCar(event, 'Car 1', 'Audi-RS6.jpg', {engine: '1.5L Turbo', mileage: '18 km/l', fuel: 'Petrol', rating: '4.3'})">Compare</button>
+        <button class="buy-btn" onclick="buyCar('Car 1')">Buy Now</button>
+      </div>
+      <div class="car-card" data-price="25000" onclick="showDetails('Car 2', 'Comfortable SUV for family use.', 'BMW-M5.jpg', {engine: '2.0L', mileage: '15 km/l', fuel: 'Diesel', rating: '4.5'})">
+        <img src="BMW-M5.jpg" alt="Car 2" />
+        <h3>BMW M5</h3>
+        <p class="price">$25,000</p>
+        <p class="tag">Best Deal</p>
+        <button class="compare-btn" onclick="compareCar(event, 'Car 2', 'BMW-M5.jpg', {engine: '2.0L', mileage: '15 km/l', fuel: 'Diesel', rating: '4.5'})">Compare</button>
+        <button class="buy-btn" onclick="buyCar('Car 2')">Buy Now</button>
+      </div>
+      <div class="car-card" data-price="30000" onclick="showDetails('Car 3', 'Luxury sedan with advanced features.', 'Bugatti.jpg', {engine: '3.0L V6', mileage: '12 km/l', fuel: 'Petrol', rating: '4.7'})">
+        <img src="Bugatti.jpg" alt="Car 3" />
+        <h3>Bugatti</h3>
+        <p class="price">$30,000</p>
+        <p class="tag">Luxury</p>
+        <button class="compare-btn" onclick="compareCar(event, 'Car 3', 'Bugatti.jpg', {engine: '3.0L V6', mileage: '12 km/l', fuel: 'Petrol', rating: '4.7'})">Compare</button>
+        <button class="buy-btn" onclick="buyCar('Car 3')">Buy Now</button>
+      </div>
+    </div>
+
+<!-- New Cars Section -->
+<h2 id="new-cars" class="section-title">New Cars</h2>
+<div class="car-grid">
+  <div class="car-card" data-price="35000" onclick="showDetails('Car 4', 'All-electric car with high-tech features.', 'Ferrari.jpg', {engine: 'Electric', mileage: '300 km/charge', fuel: 'Electric', rating: '4.9'})">
+    <img src="Ferrari.jpg" alt="Car 4" />
+    <h3>Ferrari</h3>
+    <p class="price">$35,000</p>
+    <p class="tag">Electric</p>
+    <button class="compare-btn" onclick="compareCar(event, 'Car 4', 'Ferrari.jpg', {engine: 'Electric', mileage: '300 km/charge', fuel: 'Electric', rating: '4.9'})">Compare</button>
+  </div>
+  <div class="car-card" data-price="27000" onclick="showDetails('Car 5', 'Compact crossover with smart hybrid engine.', 'Aston-Martin.jpg', {engine: '1.8L Hybrid', mileage: '22 km/l', fuel: 'Hybrid', rating: '4.6'})">
+    <img src="Aston-Martin.jpg" alt="Car 5" />
+    <h3>Aston Martin</h3>
+    <p class="price">$27,000</p>
+    <p class="tag">Hybrid</p>
+    <button class="compare-btn" onclick="compareCar(event, 'Car 5', 'Aston-Martin.jpg', {engine: '1.8L Hybrid', mileage: '22 km/l', fuel: 'Hybrid', rating: '4.6'})">Compare</button>
+  </div>
+  <div class="car-card" data-price="40000" onclick="showDetails('Car 6', 'Luxury electric SUV with autopilot features.', 'Rolls-Royce.jpg', {engine: 'Dual Motor EV', mileage: '420 km/charge', fuel: 'Electric', rating: '5.0'})">
+    <img src="Rolls-Royce.jpg" alt="Car 6" />
+    <h3>Rolls Royce</h3>
+    <p class="price">$40,000</p>
+    <p class="tag">Luxury EV</p>
+    <button class="compare-btn" onclick="compareCar(event, 'Car 6', 'Rolls-Royce.jpg', {engine: 'Dual Motor EV', mileage: '420 km/charge', fuel: 'Electric', rating: '5.0'})">Compare</button>
+  </div>
+</div>
+
+<!-- Used Cars Section -->
+<h2 id="used-cars" class="section-title">Used Cars</h2>
+<div class="car-grid">
+  <div class="car-card" data-price="35000" onclick="showDetails('Car 7', 'All-electric car with high-tech features.', 'Skoda-Octavia.jpg', {engine: 'Electric', mileage: '300 km/charge', fuel: 'Electric', rating: '4.9'})">
+    <img src="Skoda-Octavia.jpg" alt="Car 4" />
+    <h3>Skoda Octavia</h3>
+    <p class="price">$35,000</p>
+    <p class="tag">Electric</p>
+    <button class="compare-btn" onclick="compareCar(event, 'Car 7', 'Skoda-Octavia.jpg', {engine: 'Electric', mileage: '300 km/charge', fuel: 'Electric', rating: '4.9'})">Compare</button>
+  </div>
+  <div class="car-card" data-price="27000" onclick="showDetails('Car 8', 'Compact crossover with smart hybrid engine.', 'Volkswagen.jpg', {engine: '1.8L Hybrid', mileage: '22 km/l', fuel: 'Hybrid', rating: '4.6'})">
+    <img src="Volkswagen.jpg" alt="Car 5" />
+    <h3>Volkswagen</h3>
+    <p class="price">$27,000</p>
+    <p class="tag">Hybrid</p>
+    <button class="compare-btn" onclick="compareCar(event, 'Car 8', 'Volkswagen.jpg', {engine: '1.8L Hybrid', mileage: '22 km/l', fuel: 'Hybrid', rating: '4.6'})">Compare</button>
+  </div>
+  <div class="car-card" data-price="40000" onclick="showDetails('Car 9', 'Luxury electric SUV with autopilot features.', 'Lamborghini.jpg', {engine: 'Dual Motor EV', mileage: '420 km/charge', fuel: 'Electric', rating: '5.0'})">
+    <img src="Lamborghini.jpg" alt="Car 6" />
+    <h3>Lamborghini</h3>
+    <p class="price">$40,000</p>
+    <p class="tag">Luxury EV</p>
+    <button class="compare-btn" onclick="compareCar(event, 'Car 9', 'Lamborghini.jpg', {engine: 'Dual Motor EV', mileage: '420 km/charge', fuel: 'Electric', rating: '5.0'})">Compare</button>
+  </div>
+</div>
+
+  </main>
+
+  <h2 id="reviews" class="section-title">Leave a Review</h2>
+<div class="review-section">
+  <div class="star-rating">
+    <span onclick="setRating(1)">&#9733;</span>
+    <span onclick="setRating(2)">&#9733;</span>
+    <span onclick="setRating(3)">&#9733;</span>
+    <span onclick="setRating(4)">&#9733;</span>
+    <span onclick="setRating(5)">&#9733;</span>
+  </div>
+  <textarea id="review-text" placeholder="Write your review here..."></textarea>
+  <button onclick="submitReview()">Submit Review</button>
+</div>
+
+<!-- Display Reviews -->
+<div id="review-output" class="review-list"></div>
+
+  <!-- Car Details Modal -->
+  <div id="car-details" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeDetails()">&times;</span>
+      <h2 id="car-title"></h2>
+      <div id="detail-slider" class="slider">
+  <button class="slider-btn left" onclick="slideImage(-1)">&#10094;</button>
+  <img id="slider-image" src="" alt="Car Image" />
+  <button class="slider-btn right" onclick="slideImage(1)">&#10095;</button>
+</div>
+
+<button id="showDetails" onclick="showDetails()">Show Details</button>
+<p id="car-description" style="display: none;"></p>
+<ul id="car-specs" style="display: none;"></ul>
+
+    </div>
+  </div>
+
+  <!-- Comparison Modal -->
+<div id="comparison-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeComparison()">&times;</span>
+    <h2>Compare Cars</h2>
+    <div id="comparison-content"></div>
+    <button onclick="clearComparison()">Clear Comparison</button>
+  </div>
+</div>
+
+
+  <footer>
+    <p>&copy; 2025 CarHub. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
